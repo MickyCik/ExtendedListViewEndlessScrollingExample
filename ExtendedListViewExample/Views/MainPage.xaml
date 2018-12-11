@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ExtendedListViewExample"
+             xmlns:viewmodels="clr-namespace:ExtendedListViewExample.ViewModels"
+             xmlns:controls="clr-namespace:ExtendedListViewExample.Controls"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             x:Class="ExtendedListViewExample.MainPage">
+    <controls:ExtendedListView HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand"
+                               ItemsSource="{Binding Data}"
+                               LoadMoreCommand="{Binding OnLoadMoreCommand}"
+                               SelectionMode="None"
+                               Footer=""
+                               HasUnevenRows="true">
+        <controls:ExtendedListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="FillAndExpand"
+                                 Spacing="16"
+                                 Padding="16">
+                        <Image Source="ic_xam_user"
+                               HeightRequest="88"
+                               WidthRequest="88"/>
+                        <Label Text="{Binding FullName}"
+                               VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </controls:ExtendedListView.ItemTemplate>
+    </controls:ExtendedListView>
+</ContentPage>
