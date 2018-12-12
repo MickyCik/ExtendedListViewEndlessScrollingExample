@@ -6,12 +6,14 @@
              xmlns:controls="clr-namespace:ExtendedListViewExample.Controls"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
+             Title="ExtendableListView Example"
              x:Class="ExtendedListViewExample.MainPage">
     <controls:ExtendedListView HorizontalOptions="FillAndExpand"
                                VerticalOptions="FillAndExpand"
+                               SelectionMode="None"
                                ItemsSource="{Binding Data}"
                                LoadMoreCommand="{Binding OnLoadMoreCommand}"
-                               SelectionMode="None"
+                               TappedCommand="{Binding OnItemTappedCommand}"
                                Footer=""
                                HasUnevenRows="true">
         <controls:ExtendedListView.ItemTemplate>
@@ -31,5 +33,13 @@
                 </ViewCell>
             </DataTemplate>
         </controls:ExtendedListView.ItemTemplate>
+        <controls:ExtendedListView.Footer>
+            <StackLayout>
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"
+                                   Color="Navy"
+                                   HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </controls:ExtendedListView.Footer>
     </controls:ExtendedListView>
 </ContentPage>

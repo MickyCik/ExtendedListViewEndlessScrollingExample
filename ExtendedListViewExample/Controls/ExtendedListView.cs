@@ -7,6 +7,8 @@ namespace ExtendedListViewExample.Controls
 {
     public class ExtendedListView : ListView
     {
+        // ItemAppearing Property and field to allow binding of a custom command in our control
+        // directly from our xaml code
         public static readonly BindableProperty ItemAppearingCommandProperty =
             BindableProperty.Create(nameof(ItemAppearingCommand), typeof(ICommand), typeof(ExtendedListView), default(ICommand));
 
@@ -16,6 +18,8 @@ namespace ExtendedListViewExample.Controls
             set { SetValue(ItemAppearingCommandProperty, value); }
         }
 
+        // LoadMoreCommandProperty Property and field, which will be the one we will call
+        // If we need to Load more data as our control needs it.
         public static readonly BindableProperty LoadMoreCommandProperty =
                     BindableProperty.Create(nameof(LoadMoreCommand), typeof(ICommand), typeof(ExtendedListView), default(ICommand));
 
@@ -25,11 +29,40 @@ namespace ExtendedListViewExample.Controls
             set { SetValue(LoadMoreCommandProperty, value); }
         }
 
-        public ExtendedListView()
+        // TappedCommandProperty Property and field, which will be the one we will call
+        // If the user taps an item on our listview.
+        public static readonly BindableProperty TappedCommandProperty =
+            BindableProperty.Create(nameof(TappedCommand), typeof(ICommand), typeof(ExtendedListView), default(ICommand));
+
+        public ICommand TappedCommand
         {
-            this.ItemAppearing += OnItemAppearing;
+            get { return (ICommand)GetValue(TappedCommandProperty); }
+            set { SetValue(TappedCommandProperty, value); }
         }
 
+
+        public ExtendedListView() : this(ListViewCachingStrategy.RecycleElement)
+        {
+        }
+
+        public ExtendedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
+        {
+            this.ItemAppearing += OnItemAppearing;
+            this.ItemTapped += OnItemTapped;
+        }
+
+        private void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (TappedCommand != null)
+            {
+                TappedCommand?.Execute(e.Item);
+            }
+        }
+
+        /* If the new item that is appearing on the screen is the last one in the 
+           collection, we execute the LoadMoreCommand so our ViewModel knows we
+           want to load more data for our user from the data service.          
+        */
         private void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             if (ItemAppearingCommand != null)
