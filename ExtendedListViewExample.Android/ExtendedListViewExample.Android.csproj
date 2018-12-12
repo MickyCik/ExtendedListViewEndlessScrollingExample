@@ -91,6 +91,10 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_xam_user.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_xam_user.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_xam_user.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_xam_user.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_xam_user.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_xam_user.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_xam_user.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

@@ -13,8 +13,6 @@ namespace ExtendedListViewExample
         public MainPage()
         {
             InitializeComponent();
-
-            BindingContext = new MainPageViewModel();
         }
     }
 }
